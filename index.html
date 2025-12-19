@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rishabh Singh — Android & Software Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --Madrid-gold: #D4AF37;
+            --Madrid-deep: #1A1A2E;
+            --Madrid-night: #0F0F1E;
+            --Madrid-accent: #FF6B35;
+            --text-light: #E8E8E8;
+            --text-dim: #A8A8B8;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--Madrid-night);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.15;
+            background: 
+                radial-gradient(circle at 20% 50%, var(--Madrid-gold) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, var(--Madrid-accent) 0%, transparent 50%);
+            animation: shimmer 15s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.15; }
+            50% { transform: scale(1.1) rotate(5deg); opacity: 0.25; }
+        }
+
+        /* Header */
+        header {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-tagline {
+            font-size: 1rem;
+            letter-spacing: 0.3em;
+            color: var(--Madrid-gold);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.3s forwards;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--Madrid-gold) 0%, #FFF 50%, var(--Madrid-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.5s forwards;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.7s forwards;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            gap: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.9s forwards;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--Madrid-gold), var(--Madrid-accent));
+            color: var(--Madrid-night);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--Madrid-gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--Madrid-gold);
+            color: var(--Madrid-night);
+            transform: translateY(-3px);
+        }
+
+        /* Story Section */
+        .story-section {
+            position: relative;
+            z-index: 2;
+            padding: 8rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--Madrid-gold);
+            text-align: center;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .story-card {
+            background: rgba(26, 26, 46, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .story-card:nth-child(1) { animation-delay: 0.1s; }
+        .story-card:nth-child(2) { animation-delay: 0.2s; }
+        .story-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .story-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--Madrid-gold);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.2);
+        }
+
+        .story-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .story-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--Madrid-gold);
+        }
+
+        .story-card p {
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        /* Journey Timeline */
+        .journey-section {
+            position: relative;
+            z-index: 2;
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(26, 26, 46, 0.4) 50%, transparent 100%);
+        }
+
+        .timeline {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, transparent, var(--Madrid-gold), transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .timeline-item:nth-child(odd) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(even) { 
+            animation-delay: 0.2s;
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: rgba(26, 26, 46, 0.7);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--Madrid-gold);
+            transform: scale(1.02);
+        }
+
+        .timeline-year {
+            color: var(--Madrid-accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--Madrid-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            position: relative;
+            z-index: 2;
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: rgba(26, 26, 46, 0.5);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .skill-category:nth-child(1) { animation-delay: 0.1s; }
+        .skill-category:nth-child(2) { animation-delay: 0.2s; }
+        .skill-category:nth-child(3) { animation-delay: 0.3s; }
+        .skill-category:nth-child(4) { animation-delay: 0.4s; }
+
+        .skill-category:hover {
+            border-color: var(--Madrid-gold);
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--Madrid-gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+        }
+
+        .skill-tag {
+            padding: 0.5rem 1rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            transition: all 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--Madrid-gold);
+            color: var(--Madrid-night);
+            transform: scale(1.05);
+        }
+
+        /* Projects Section */
+        .projects-section {
+            position: relative;
+            z-index: 2;
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(26, 26, 46, 0.3) 50%, transparent 100%);
+        }
+
+        .projects-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--Madrid-gold);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.3);
+        }
+
+        .project-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(255, 107, 53, 0.1));
+        }
+
+        .project-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            color: var(--Madrid-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-body {
+            padding: 2rem;
+        }
+
+        .project-description {
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-badge {
+            padding: 0.3rem 0.8rem;
+            background: rgba(255, 107, 53, 0.15);
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--Madrid-accent);
+            font-weight: 500;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--Madrid-gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .project-link:hover {
+            gap: 1rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            position: relative;
+            z-index: 2;
+            padding: 8rem 2rem;
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--Madrid-gold), var(--Madrid-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-text {
+            font-size: 1.3rem;
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 1rem 2rem;
+            background: rgba(26, 26, 46, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50px;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .contact-link:hover {
+            background: var(--Madrid-gold);
+            color: var(--Madrid-night);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 2;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        footer p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .story-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                padding-left: 60px;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <!-- Hero Section -->
+    <header>
+        <div class="hero-content">
+            <div class="hero-tagline">From Delhi to Göttingen to Madrid</div>
+            <h1>Rishabh Singh</h1>
+            <p class="hero-subtitle">Android Engineer · ML Enthusiast · Madrid Dreamer</p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary">Let's Connect</a>
+                <a href="#story" class="btn btn-secondary">My Journey</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Story Section -->
+    <section class="story-section" id="story">
+        <h2 class="section-title">The Madrid Dream</h2>
+        <div class="story-grid">
+            <div class="story-card">
+                <div class="story-icon">🌟</div>
+                <h3>The Spark</h3>
+                <p>My first phone was an Ericsson. That device sparked a lifelong fascination with mobile technology and connectivity. From that moment, I knew I wanted to build the future of mobile experiences.</p>
+            </div>
+            <div class="story-card">
+                <div class="story-icon">❄️</div>
+                <h3>Northern Lights</h3>
+                <p>Standing under Abisko's aurora three days ago, I felt that childhood spark reignite as transformative energy. The dancing lights reminded me that dreams, like the Northern Lights, require patience, timing, and being in the right place.</p>
+            </div>
+            <div class="story-card">
+                <div class="story-icon">⚽</div>
+                <h3>Madrid Calling</h3>
+                <p>Madrid has inspired me since childhood — from Real Madrid's glory to Spain's vibrant tech scene. With 4+ years at Samsung and a Master's thesis on real-time ML, I'm ready to bring my technical expertise and passion to Madrid's innovative teams.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Timeline -->
+    <section class="journey-section">
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2021 - 2023</div>
+                    <h3 class="timeline-title">Software Development Engineer</h3>
+                    <p class="timeline-company">Samsung R&D Institute, Delhi</p>
+                    <p>Led core development of Samsung's global power-saving feature, resolved 600+ issues optimizing performance by 30%, and modernized legacy codebase to Kotlin with MVVM. Awarded Best Employee Q3 2023.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2023 - Present</div>
+                    <h3 class="timeline-title">Master's Student & Werkstudent</h3>
+                    <p class="timeline-company">Hochschule Nordhausen & LaVision GmbH</p>
+                    <p>Completing thesis on real-time ML pipelines (30Hz processing) for flow visualization. Automated imaging workflows reducing latency by 25%, achieved 95% IoU accuracy in object detection, and optimized performance with GPU acceleration.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">February 2026</div>
+                    <h3 class="timeline-title">Madrid Chapter</h3>
+                    <p class="timeline-company">The Next Adventure</p>
+                    <p>Relocating full-time to Madrid with EU Blue Card eligibility. Ready to contribute to Spain's thriving tech ecosystem, bringing real-time systems expertise, Android mastery, and a passion for building world-class mobile experiences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section">
+        <h2 class="section-title">Technical Arsenal</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Android Development</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Kotlin</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">Jetpack Compose</span>
+                    <span class="skill-tag">Coroutines</span>
+                    <span class="skill-tag">Flow</span>
+                    <span class="skill-tag">MVVM</span>
+                    <span class="skill-tag">Hilt</span>
+                    <span class="skill-tag">Room</span>
+                    <span class="skill-tag">Retrofit</span>
+                    <span class="skill-tag">Firebase</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Systems & Performance</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Real-time Processing</span>
+                    <span class="skill-tag">Qt</span>
+                    <span class="skill-tag">Multithreading</span>
+                    <span class="skill-tag">GPU Optimization</span>
+                    <span class="skill-tag">STM32</span>
+                    <span class="skill-tag">Embedded Systems</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>ML & Computer Vision</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">PyTorch</span>
+                    <span class="skill-tag">YOLO</span>
+                    <span class="skill-tag">OpenCV</span>
+                    <span class="skill-tag">TensorFlow</span>
+                    <span class="skill-tag">Object Detection</span>
+                    <span class="skill-tag">Image Processing</span>
+                    <span class="skill-tag">Model Optimization</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>DevOps & Tools</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">CI/CD</span>
+                    <span class="skill-tag">Gradle</span>
+                    <span class="skill-tag">JUnit</span>
+                    <span class="skill-tag">Mockito</span>
+                    <span class="skill-tag">Agile/Scrum</span>
+                    <span class="skill-tag">AWS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="projects-section">
+        <h2 class="section-title">Featured Work</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 class="project-title">BOS Flow Visualization</h3>
+                </div>
+                <div class="project-body">
+                    <p class="project-description">Master's thesis developing real-time ML pipeline for artifact detection and removal in flow imaging. Achieved 95% IoU accuracy with 32.5× performance improvement through GPU optimization.</p>
+                    <div class="project-tech">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">C++</span>
+                        <span class="tech-badge">PyTorch</span>
+                        <span class="tech-badge">YOLO</span>
+                        <span class="tech-badge">Real-time Processing</span>
+                    </div>
+                    <a href="#" class="project-link">LaVision GmbH →</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 class="project-title">Vibelet Music App</h3>
+                </div>
+                <div class="project-body">
+                    <p class="project-description">AI-powered music player with intelligent shuffle algorithm increasing user engagement by 40%. Modern Jetpack Compose UI with Firebase backend. 50+ GitHub stars.</p>
+                    <div class="project-tech">
+                        <span class="tech-badge">Kotlin</span>
+                        <span class="tech-badge">Jetpack Compose</span>
+                        <span class="tech-badge">Firebase</span>
+                        <span class="tech-badge">MVVM</span>
+                    </div>
+                    <a href="https://github.com/s1rishabh" class="project-link">View on GitHub →</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 class="project-title">Madrid Events Explorer</h3>
+                </div>
+                <div class="project-body">
+                    <p class="project-description">Modern Android app showcasing events, football matches, and cultural spots in Madrid. Clean architecture with offline-first design and location-based features.</p>
+                    <div class="project-tech">
+                        <span class="tech-badge">Kotlin</span>
+                        <span class="tech-badge">Compose</span>
+                        <span class="tech-badge">Hilt</span>
+                        <span class="tech-badge">Room</span>
+                        <span class="tech-badge">Maps SDK</span>
+                    </div>
+                    <a href="#" class="project-link">In Development →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-content">
+            <h2 class="contact-title">Let's Build the Future</h2>
+            <p class="contact-text">
+                Ready to relocate to Madrid in February 2026. EU Blue Card eligible. 
+                Open to exciting opportunities in Android development, real-time systems, and ML engineering.
+            </p>
+            <div class="contact-links">
+                <a href="mailto:singh.rishabh.tech@gmail.com" class="contact-link">
+                    📧 Email
+                </a>
+                <a href="tel:+491556620 7458" class="contact-link">
+                    📱 +49 155 6620 7458
+                </a>
+                <a href="https://linkedin.com/in/s1rishabh" class="contact-link" target="_blank">
+                    💼 LinkedIn
+                </a>
+                <a href="https://github.com/s1rishabh" class="contact-link" target="_blank">
+                    🔧 GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Rishabh Singh. Crafted with passion for Madrid. 🇪🇸</p>
+    </footer>
+</body>
+</html>
